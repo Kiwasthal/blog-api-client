@@ -1,16 +1,38 @@
 import Link from 'next/link';
+import IndexImage from '../components/MainImage';
 
-const Home = () => {
+const Home = ({ posts }) => {
   return (
-    <div className="page">
-      <h1 className="text-3xl font-bold underline text-gray-400">
-        Hello World
-      </h1>
-      <Link href="/posts">
-        <a>Posts</a>
+    <>
+      <IndexImage />
+
+      <Link href={`/posts`}>
+        <p>Posts</p>
       </Link>
-    </div>
+
+      {posts.map(post => (
+        <div key={post._id} className="p-4">
+          <Link href={`/posts/${post._id}`} passHref>
+            <p>
+              {post._id} - {post.title}
+            </p>
+          </Link>
+          <hr />
+        </div>
+      ))}
+    </>
   );
 };
+
+export async function getStaticProps() {
+  const response = await fetch('http://localhost:3000/api/posts');
+  const data = await response.json();
+
+  return {
+    props: {
+      posts: data,
+    },
+  };
+}
 
 export default Home;
