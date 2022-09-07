@@ -39,6 +39,9 @@ const singlePostVariants = {
 };
 
 const SinglePost = ({ post, index, animate }) => {
+  const placeHolder = post.content.slice(0, 50) + '...';
+  const addedDate = moment(post.timestamp).format('LL');
+
   return (
     <motion.div
       className="card hover:shadow-lg"
@@ -48,13 +51,44 @@ const SinglePost = ({ post, index, animate }) => {
       custom={index}
     >
       <div className="m-4 flex justify-between items-end">
-        <span className="text-xl tracking-wide font-bold font-main">
-          {post.title}
-        </span>
-        <span className="block text-gray-500 text-sm">
-          Author : {post.user.username}
-        </span>
+        <div className="flex flex-col">
+          <span className="text-2xl tracking-wide font-bold font-main text-gray-800">
+            {post.title}
+          </span>
+          <span className="text-sm text-gray-500">Added : {addedDate}</span>
+        </div>
+
+        <div className="flex flex-col items-end">
+          <span className="block text-gray-500 text-sm">
+            Author : {post.user.username}
+          </span>
+          <div className="flex gap-2  items-center">
+            <span className="text-xl text-gray-900 font-extrabold">
+              {post.comments.length}
+            </span>
+            <svg
+              className="w-6 h-6"
+              fill="#111827"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z"
+                clipRule="evenodd"
+              ></path>
+            </svg>
+          </div>
+        </div>
       </div>
+      <hr />
+      <p className="text-lg font-semibold p-4 w-30">{placeHolder}</p>
+
+      <Link href={`/posts/${post._id}`} passHref>
+        <button className="text-sm rounded-lg absolute bottom-3 right-2  mr-3 mb-2 bg-gray-900 hover:bg-gray-700 text-white font-bold py-2 px-4  font-secondary tracking-wide">
+          READ
+        </button>
+      </Link>
     </motion.div>
   );
 };
@@ -62,59 +96,57 @@ const SinglePost = ({ post, index, animate }) => {
 const TopPosts = ({ posts }) => {
   const topRow = posts.slice(0, 3);
   const bottomRow = posts.slice(3, 5);
-  const controls = useAnimation();
-  const postControls = useAnimation();
-  const [ref, inView] = useInView();
-  const [postsRef, postsInView] = useInView();
+  const titleControls = useAnimation();
+  const topPostsControls = useAnimation();
+  const [titleRef, titleInView] = useInView();
+  const [topPostsRef, topPostsInView] = useInView();
 
   useEffect(() => {
-    if (inView) controls.start('visible');
-  }, [controls, inView]);
+    if (titleInView) titleControls.start('visible');
+  }, [titleControls, titleInView]);
 
   useEffect(() => {
-    if (postsInView) postControls.start('visible');
-  }, [postControls, postsInView]);
+    if (topPostsInView) topPostsControls.start('visible');
+  }, [topPostsControls, topPostsInView]);
 
   return (
     <AnimatePresence>
-      <div className="flex items-center flex-col p-2 pr-12 pl-12" ref={ref}>
+      <div
+        className="flex items-center flex-col p-2 pr-12 pl-12"
+        ref={titleRef}
+      >
         <motion.div
-          className="flex items-center my-4 before:flex-1 before:border-2 before:border-gray-900 before:mt-0.5 after:flex-1 after:border-2 after:border-gray-900 after:mt-0.5 w-full"
-          animate={controls}
+          className="flex items-center my-4 before:flex-1 before:border-2 before:border-gray-900 before:mt-0.5 after:flex-1 after:border-2 after:border-gray-900 after:mt-0.5 w-full mt-12"
+          animate={titleControls}
           initial="hidden"
           variants={borderVariants}
         >
           <motion.h1
-            className="text-5xl font-bold text-gray-900 px-2 z-20"
-            animate={controls}
+            className="text-7xl font-bold text-gray-900 px-2  "
+            animate={titleControls}
             initial="hidden"
             variants={titleVariants}
           >
             Top Posts
           </motion.h1>
         </motion.div>
-        <div
-          className="grid lg:grid-cols-3 gap-5 lg:justify-evenly pb-5 w-full"
-          ref={postsRef}
-        >
+        <div className="grid lg:grid-cols-3 gap-5 lg:justify-evenly pb-5 w-full">
           {topRow.map((post, i) => (
             <SinglePost
               key={post._id}
               post={post}
-              animate={postControls}
+              animate={topPostsControls}
               index={i}
             />
           ))}
         </div>
-        <div
-          className="grid lg:grid-cols-2 gap-5 lg:justify-center pb-12  lg:w-3/4 md:w-full"
-          ref={postsRef}
-        >
+        <span ref={topPostsRef}></span>
+        <div className="grid lg:grid-cols-2 gap-5 lg:justify-center pb-12  lg:w-3/4 md:w-full">
           {bottomRow.map((post, i) => (
             <SinglePost
               key={post._id}
               post={post}
-              animate={postControls}
+              animate={topPostsControls}
               index={i + 2.6}
             />
           ))}
@@ -124,9 +156,4 @@ const TopPosts = ({ posts }) => {
   );
 };
 
-// <Link href={`/posts/${post._id}`} passHref>
-//   <p>
-//     {post._id} - {post.title}
-//   </p>
-// </Link>;
 export default TopPosts;
