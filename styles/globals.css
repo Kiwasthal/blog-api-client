@@ -5,3 +5,23 @@
 .dynamic-txt {
   @apply text-slate-800 font-bold mr-3;
 }
+
+.card {
+  @apply bg-white rounded overflow-hidden shadow-md relative;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111827;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

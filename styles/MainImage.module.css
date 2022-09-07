@@ -26,7 +26,7 @@
 }
 
 .statictxt {
-  color: black;
+  color: white;
   font-size: 60px;
   font-weight: 400;
   z-index: 10;
@@ -34,7 +34,7 @@
 
 .dynamicli {
   list-style: none;
-  color: #a6341e;
+  color: #111827;
   font-size: 60px;
   font-weight: 500;
   position: relative;
@@ -62,7 +62,7 @@
   height: 100%;
   width: 100%;
   background: #b59d87;
-  border-left: 2px solid #fc6d6d;
+  border-left: 2px solid #111827;
   animation: typing 3s steps(10) infinite;
 }
 
