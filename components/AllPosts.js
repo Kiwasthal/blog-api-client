@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import moment from 'moment';
 
 const AllPosts = ({ posts }) => {
   return (
