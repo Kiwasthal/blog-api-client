@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.dynamic-txt {
+  @apply text-slate-800 font-bold mr-3;
+}
