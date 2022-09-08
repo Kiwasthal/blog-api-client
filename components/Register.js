@@ -1,9 +1,8 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Formik } from 'formik';
 
-const Login = ({ updateUserAuth }) => {
+const Register = ({ updateUserAuth }) => {
   const router = useRouter();
   // const [logErr, setLogErr] = useState(false);
   // const [errMsg, setErrMsg] = useState('');
@@ -46,7 +45,7 @@ const Login = ({ updateUserAuth }) => {
           className="text-5xl font-bold text-gray-900 px-2  "
           initial="hidden"
         >
-          Log In
+          Register
         </motion.h1>
       </motion.div>
       <Formik
@@ -62,7 +61,7 @@ const Login = ({ updateUserAuth }) => {
         onSubmit={async (values, { setSubmitting }) => {
           const formData = JSON.stringify(values);
           try {
-            const request = await fetch('http://localhost:3000/api/login', {
+            const request = await fetch('http://localhost:3000/api/register', {
               method: 'POST',
               body: formData,
               headers: {
@@ -128,13 +127,28 @@ const Login = ({ updateUserAuth }) => {
               />
               <p className="text-red-500 text-xs italic"></p>
             </div>
-
+            <div className="mb-6">
+              <label
+                className="block text-gray-700 text-xl font-bold mb-2"
+                htmlFor="password"
+              >
+                Confirm Password
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="password"
+                name="password"
+                type="password"
+                placeholder="******************"
+              />
+              <p className="text-red-500 text-xs italic"></p>
+            </div>
             <div className="flex items-center justify-between">
               <button
                 className="bg-gray-900 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="button"
               >
-                Log In
+                Register
               </button>
             </div>
           </form>
@@ -144,4 +158,4 @@ const Login = ({ updateUserAuth }) => {
   );
 };
 
-export default Login;
+export default Register;
