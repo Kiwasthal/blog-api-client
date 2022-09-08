@@ -103,7 +103,7 @@ const Register = ({ updateUserAuth }) => {
                 Username
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none  focus:outline-slate-400"
                 id="username"
                 name="username"
                 type="text"
@@ -119,7 +119,7 @@ const Register = ({ updateUserAuth }) => {
                 Password
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:outline-slate-400 "
                 id="password"
                 name="password"
                 type="password"
@@ -130,15 +130,15 @@ const Register = ({ updateUserAuth }) => {
             <div className="mb-6">
               <label
                 className="block text-gray-700 text-xl font-bold mb-2"
-                htmlFor="password"
+                htmlFor="confirmPassword"
               >
                 Confirm Password
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="password"
-                name="password"
-                type="password"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:outline-slate-400"
+                id="confirmPassword"
+                name="confirmPassword"
+                type="confirmPassword"
                 placeholder="******************"
               />
               <p className="text-red-500 text-xs italic"></p>
