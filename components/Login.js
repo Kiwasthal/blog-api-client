@@ -3,8 +3,9 @@ import { motion } from 'framer-motion';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
-const Login = ({ updateUserAuth }) => {
+const Login = ({ updateUserAuth, userAuth }) => {
   const router = useRouter();
+
   const initialValues = {
     username: '',
     password: '',
