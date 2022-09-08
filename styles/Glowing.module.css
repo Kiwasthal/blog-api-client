@@ -1,0 +1,81 @@
+.container {
+  position: absolute;
+  top: 0;
+  left: 40%;
+  height: 120%;
+  width: 60%;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.glowing {
+  position: relative;
+}
+
+.firstPrt {
+  position: absolute;
+  top: 380px;
+  left: 80px;
+  bottom: 80px;
+  right: 80px;
+  animation: animate 10s alternate infinite;
+}
+
+.firstPrt::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: -8px;
+  width: 15px;
+  height: 15px;
+  background: rgb(255, 230, 0);
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(255, 214, 0, 1), 0 0 40px rgba(255, 214, 0, 1),
+    0 0 60px rgba(255, 214, 0, 1), 0 0 80px rgba(255, 214, 0, 1),
+    0 0 0 8px rgba(255, 214, 0, 0.1);
+}
+
+.secondPrt {
+  position: absolute;
+  top: 260px;
+  left: 160px;
+  bottom: 160px;
+  right: 30px;
+  animation: animated 10s alternate infinite;
+}
+
+.secondPrt::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: -8px;
+  width: 15px;
+  height: 15px;
+  background: rgb(145, 255, 0);
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(134, 255, 0, 1), 0 0 40px rgba(134, 255, 0, 1),
+    0 0 60px rgba(134, 255, 0, 1), 0 0 80px rgba(134, 255, 0, 1),
+    0 0 0 8px rgba(134, 255, 0, 0.1);
+}
+
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+    filter: hue-rotate(360deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    filter: hue-rotate(0deg);
+  }
+}
+
+@keyframes animated {
+  0% {
+    transform: rotate(360deg);
+    filter: hue-rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+}

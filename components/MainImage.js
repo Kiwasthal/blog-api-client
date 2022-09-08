@@ -1,12 +1,14 @@
 import Image from 'next/image';
 import MainImage from '../public/blog-main-image.jpg';
 import MainHeader from './MainHeader';
+import Glowing from './Glowing';
 import { AnimatedTextUpper, AnimatedTextLower } from './MainSubHeader';
 
 const IndexImageSlot = () => {
   return (
     <div className="w-screen h-screen relative border-black border-b-8 border-solid">
       <MainHeader />
+      <Glowing />
       <AnimatedTextUpper />
       <AnimatedTextLower />
       <Image

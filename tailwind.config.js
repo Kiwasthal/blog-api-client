@@ -5,7 +5,19 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        typing: {
+          '100%': {
+            left: '100%',
+            margin: '0px 45px 0px  35px',
+          },
+        },
+      },
+      animation: {
+        typing: `typing 1.5s steps(10) infinite`,
+      },
+    },
   },
   plugins: [],
 };

@@ -7,7 +7,7 @@
 }
 
 .card {
-  @apply bg-white rounded overflow-hidden shadow-md relative;
+  @apply bg-white rounded overflow-hidden shadow-md relative p-2;
 }
 
 ::-webkit-scrollbar {
