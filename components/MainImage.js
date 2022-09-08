@@ -6,7 +6,7 @@ import { AnimatedTextUpper, AnimatedTextLower } from './MainSubHeader';
 
 const IndexImageSlot = () => {
   return (
-    <div className="w-screen h-screen relative border-black border-b-8 border-solid">
+    <div className="w-screen h-screen relative border-gray-900 border-b-8 border-solid">
       <MainHeader />
       <Glowing />
       <AnimatedTextUpper />

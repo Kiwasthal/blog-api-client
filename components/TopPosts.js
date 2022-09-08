@@ -107,7 +107,6 @@ const TopPosts = ({ posts }) => {
   return (
     <AnimatePresence>
       <div className="flex items-center flex-col p-2 pr-12 pl-12">
-        <span ref={titleRef}></span>
         <motion.div
           className="flex items-center my-4 before:flex-1 before:border-2 before:border-gray-900 before:mt-0.5 after:flex-1 after:border-2 after:border-gray-900 after:mt-0.5 w-full mt-12"
           animate={titleControls}
@@ -123,6 +122,7 @@ const TopPosts = ({ posts }) => {
             Top Posts
           </motion.h1>
         </motion.div>
+        <span ref={titleRef}></span>
         <div className="grid lg:grid-cols-3 gap-5 lg:justify-evenly pb-5 w-full">
           {topRow.map((post, i) => (
             <SinglePost
