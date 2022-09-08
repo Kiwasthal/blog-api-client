@@ -1,5 +1,7 @@
-const Login = () => {
-  return <h1>Hello22</h1>;
+import LoginForm from '../components/Login';
+
+const Login = ({ updateUserAuth }) => {
+  return <LoginForm updateUserAuth={updateUserAuth} />;
 };
 
 export default Login;
