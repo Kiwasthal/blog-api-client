@@ -1,10 +1,10 @@
 import moment from 'moment';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import LogInToComment from '../../components/LogInToComment';
 import CreateCommentForm from '../../components/CreateCommentForm';
+import Comment from '../../components/Comment';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -40,23 +40,23 @@ const spanVariants = {
 
 const Post = ({ post, comments, userAuth }) => {
   const titleTxt = post.title.split(' ');
-  const { query } = useRouter();
+  const { query, push } = useRouter();
   const [currentComments, setCurrentComments] = useState(comments);
+  const [regenerating, setRegenerating] = useState(true);
 
   useEffect(() => {
-    let mounted = true;
-    const fetchComments = async () => {
-      const response = await fetch(
-        `http://localhost:3000/api/posts/${query.postId}/comments`
-      );
-      if (mounted) {
-        const data = await response.json();
+    (async () => {
+      if (regenerating) {
+        const res = await fetch(
+          `http://localhost:3000/api/posts/${query.postId}/comments`
+        );
+
+        const data = await res.json();
         setCurrentComments(data);
+        setRegenerating(false);
       }
-    };
-    fetchComments();
-    return () => (mounted = false);
-  }, [currentComments]);
+    })();
+  }, [currentComments, regenerating]);
 
   return (
     <div className="page">
@@ -100,20 +100,30 @@ const Post = ({ post, comments, userAuth }) => {
               </h1>
             </div>
             <LogInToComment userAuth={userAuth} />
-            <CreateCommentForm userAuth={userAuth} />
-            <div>
-              {currentComments && currentComments.length ? (
-                currentComments.map((comment, index) => {
-                  return (
-                    <div key={comment._id}>
-                      <div>{comment.comment}</div>
-                      <div>{comment.user.username}</div>
-                    </div>
-                  );
-                })
-              ) : (
-                <div>There are no comments</div>
-              )}
+            <CreateCommentForm
+              userAuth={userAuth}
+              regenerate={setRegenerating}
+            />
+
+            {currentComments && currentComments.length ? (
+              currentComments.map((comment, index) => (
+                <Comment key={comment._id} comment={comment} index={index} />
+              ))
+            ) : (
+              <div className="text-gray-900  text-xl mt-6">
+                There are no comments
+              </div>
+            )}
+            <div className="flex justify-center mt-6">
+              <svg
+                className="w-12 h-12 cursor-pointer hover:animate-bounce "
+                fill="#0f172a"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+                onClick={() => push('/')}
+              >
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+              </svg>
             </div>
           </section>
         </div>

@@ -2,9 +2,8 @@ import { useRouter } from 'next/router';
 import { motion, useAnimation } from 'framer-motion';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { useEffect } from 'react';
 
-const CreateCommentForm = ({ userAuth }) => {
+const CreateCommentForm = ({ userAuth, regenerate }) => {
   const { query } = useRouter();
   const controls = useAnimation();
 
@@ -45,8 +44,10 @@ const CreateCommentForm = ({ userAuth }) => {
                 }
               );
               const data = await request.json();
-              if (request.status === 200) resetForm();
-              else setFieldError('comment', data.errors[0].msg);
+              if (request.status === 200) {
+                resetForm();
+                regenerate(true);
+              } else setFieldError('comment', data.errors[0].msg);
               setSubmitting(false);
             } catch (err) {
               console.log(err);
