@@ -7,8 +7,8 @@ const containerVariants = {
   visible: (i = 1) => ({
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.04 * i,
+      staggerChildren: 0.18,
+      delayChildren: 0.32 * i,
     },
   }),
 };

@@ -47,7 +47,7 @@ const Post = ({ post, comments, userAuth }) => {
     let mounted = true;
     const fetchComments = async () => {
       const response = await fetch(
-        `http://localhost:3000/api/posts/${query.id}/comments`
+        `http://localhost:3000/api/posts/${query.postId}/comments`
       );
       if (mounted) {
         const data = await response.json();
@@ -56,11 +56,11 @@ const Post = ({ post, comments, userAuth }) => {
     };
     fetchComments();
     return () => (mounted = false);
-  }, [currentComments, query.id]);
+  }, [currentComments]);
 
   return (
     <div className="page">
-      <div className="w-full flex flex-col items-center ">
+      <div className="flex flex-col items-center ">
         <div className="shadow-lg pb-12 px-4 mt-8 flex flex-col  items-center justify-center lg:w-3/4 md:w-4/5 border-l-2 border-r-2 border-gray-900">
           <div className="flex flex-col items-center mb-6">
             <motion.div
@@ -93,9 +93,28 @@ const Post = ({ post, comments, userAuth }) => {
           </p>
         </div>
         <div className="shadow-lg pb-12 px-4 mt-8 flex flex-col   justify-center lg:w-3/4 md:w-4/5 border-l-2 border-r-2 border-gray-900">
-          <section className="mt-12 flex flex-col items-center mb-6 ">
+          <section className="mt-4 flex flex-col items-center mb-6 ">
+            <div className="flex items-center my-4 before:flex-1 before:border-2 before:border-gray-900 before:mt-0.5 after:flex-1 after:border-2 after:border-gray-900 after:mt-0.5 w-2/3 md:w-4/5 mb-6 ">
+              <h1 className="text-5xl font-bold text-gray-900 px-2  ">
+                Comments
+              </h1>
+            </div>
             <LogInToComment userAuth={userAuth} />
             <CreateCommentForm userAuth={userAuth} />
+            <div>
+              {currentComments && currentComments.length ? (
+                currentComments.map((comment, index) => {
+                  return (
+                    <div key={comment._id}>
+                      <div>{comment.comment}</div>
+                      <div>{comment.user.username}</div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div>There are no comments</div>
+              )}
+            </div>
           </section>
         </div>
       </div>

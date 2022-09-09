@@ -17,7 +17,7 @@ const CreateCommentForm = ({ userAuth }) => {
   });
 
   return (
-    <div className="w-2/3">
+    <div className="w-2/3 md:w-4/5 ">
       {userAuth && (
         <Formik
           initialValues={initialValues}
@@ -30,10 +30,10 @@ const CreateCommentForm = ({ userAuth }) => {
             const formData = JSON.stringify(values);
             const token = localStorage.getItem('token');
             const bearer = `Bearer ${token}`;
-            const param = query.id;
+            const param = query.postId;
 
             try {
-              const request = fetch(
+              const request = await fetch(
                 `http://localhost:3000/api/posts/${param}/comments`,
                 {
                   method: 'POST',
@@ -69,8 +69,8 @@ const CreateCommentForm = ({ userAuth }) => {
                         <div
                           className={
                             meta.error && meta.touched
-                              ? 'flex items-center border-b border-red-700 py-2'
-                              : 'flex items-center border-b border-gray-700 py-2'
+                              ? 'flex items-center border-b border-red-700 py-1'
+                              : 'flex items-center border-b border-gray-700 py-1'
                           }
                         >
                           <input

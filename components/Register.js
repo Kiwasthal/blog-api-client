@@ -77,7 +77,7 @@ const Register = () => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         validateOnChange={false}
-        onSubmit={async (values, { setFieldError, errors }) => {
+        onSubmit={async (values, { setFieldError }) => {
           const formData = JSON.stringify(values);
 
           try {

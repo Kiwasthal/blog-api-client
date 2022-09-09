@@ -121,7 +121,7 @@ const Login = ({ updateUserAuth }) => {
                   {({ field, meta }) => (
                     <input
                       id="username"
-                      type="username"
+                      type="text"
                       placeholder="User Name"
                       {...field}
                       className={
