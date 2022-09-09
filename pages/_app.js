@@ -6,23 +6,27 @@ import { useEffect, useState } from 'react';
 
 function MyApp({ Component, pageProps }) {
   const [username, setUsername] = useState(null);
-  const [userAuth, setUserAuth] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const user = localStorage.getItem('userAuth');
-      const init = JSON.parse(user);
-      return init || false;
-    }
-  });
+  const [userAuth, setUserAuth] = useState(null);
+  const [mounted, setMounted] = useState(false);
+  console.log(userAuth);
 
   useEffect(() => {
-    let isMounted = true;
+    const user = localStorage.getItem('userAuth');
+    const init = JSON.parse(user);
+    setUserAuth(init || false);
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
     let getUser = () => {
-      if (isMounted) localStorage.setItem('userAuth', JSON.stringify(userAuth));
+      if (mounted) localStorage.setItem('userAuth', JSON.stringify(userAuth));
       if (userAuth) setUsername(localStorage.getItem('username'));
     };
+
     getUser();
-    return () => (isMounted = false);
-  }, [userAuth]);
+
+    return () => setMounted(false);
+  }, [userAuth, mounted]);
 
   return (
     <Transition>
