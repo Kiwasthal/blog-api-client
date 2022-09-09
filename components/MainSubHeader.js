@@ -35,7 +35,7 @@ const spanVariants = {
 };
 
 export const AnimatedTextUpper = () => {
-  const text = ['A', 'REACT', 'BLOG-APP'];
+  const text = ['A', 'REACT', 'BLOG-APP '];
   return (
     <AnimatePresence>
       <motion.div

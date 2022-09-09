@@ -17,6 +17,7 @@ const IndexImageSlot = () => {
         objectFit="cover"
         quality={100}
         alt="picture of lantern"
+        priority={true}
       />
     </div>
   );
