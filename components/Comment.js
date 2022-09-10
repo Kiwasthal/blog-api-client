@@ -17,7 +17,7 @@ const Comment = ({ comment, index }) => {
       x: 0,
       transition: {
         duration: 1,
-        delay: 0.5,
+        delay: 0.2,
       },
     },
   };
