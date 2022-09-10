@@ -67,6 +67,7 @@ const SinglePost = ({ post, userAuth }) => {
     if (!isAuthorized) {
       setMsg('Log in to like this post');
       setWarning(true);
+      return;
     }
     setLikedClicked(!likeClicked);
 
@@ -145,11 +146,13 @@ const SinglePost = ({ post, userAuth }) => {
               <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"></path>
             </svg>
           </div>
-          {warning && <span className="text-sm text-red-500">{msg}</span>}
+          {warning && !userAuth && (
+            <span className="text-sm text-red-500">{msg}</span>
+          )}
           {fakeLike && (
             <span className="text-blue-500 text-sm">Thanks for Liking!</span>
           )}
-          {alreadyLiked && (
+          {alreadyLiked && !fakeLike && (
             <span className="text-blue-500 text-sm">
               You have already liked this post!
             </span>
