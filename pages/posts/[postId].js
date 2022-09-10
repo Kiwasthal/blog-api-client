@@ -14,7 +14,7 @@ const Post = ({ post, comments, userAuth }) => {
     (async () => {
       if (regenerating) {
         const res = await fetch(
-          `http://localhost:3000/api/posts/${query.postId}/comments`
+          `https://kiwasthal-blog-server.herokuapp.com/api/posts/${query.postId}/comments`
         );
 
         const data = await res.json();
@@ -76,7 +76,9 @@ const Post = ({ post, comments, userAuth }) => {
 export default Post;
 
 export async function getStaticPaths() {
-  const response = await fetch(`http://localhost:3000/api/posts`);
+  const response = await fetch(
+    `https://kiwasthal-blog-server.herokuapp.com/api/posts`
+  );
   const postsList = await response.json();
 
   const paths = postsList.map(post => ({
@@ -91,11 +93,11 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const response = await fetch(
-    `http://localhost:3000/api/posts/${params.postId}`
+    `https://kiwasthal-blog-server.herokuapp.com/api/posts/${params.postId}`
   );
 
   const responseNext = await fetch(
-    `http://localhost:3000/api/posts/${params.postId}/comments`
+    `https://kiwasthal-blog-server.herokuapp.com/api/posts/${params.postId}/comments`
   );
 
   const data = await response.json();

@@ -8,7 +8,6 @@ function MyApp({ Component, pageProps }) {
   const [username, setUsername] = useState(null);
   const [userAuth, setUserAuth] = useState(null);
   const [mounted, setMounted] = useState(false);
-  console.log(userAuth);
 
   useEffect(() => {
     const user = localStorage.getItem('userAuth');

@@ -77,7 +77,7 @@ const SinglePost = ({ post, userAuth }) => {
 
     try {
       const request = await fetch(
-        `http://localhost:3000/api/posts/${query.postId}`,
+        `https://kiwasthal-blog-server.herokuapp.com/api/posts/${query.postId}`,
         {
           method: 'PUT',
           body: postid,
@@ -88,7 +88,6 @@ const SinglePost = ({ post, userAuth }) => {
         }
       );
       const data = await request.json();
-      console.log(data);
       if (request.status === 200 && data.result.matchedCount) setFakeLike(true);
       else if (request.status === 200 && !data.result.matchedCount)
         setAlreadyLiked(true);

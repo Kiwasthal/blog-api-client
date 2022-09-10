@@ -78,13 +78,16 @@ const Login = ({ updateUserAuth }) => {
           const formData = JSON.stringify(values);
 
           try {
-            const request = await fetch('http://localhost:3000/api/login', {
-              method: 'POST',
-              body: formData,
-              headers: {
-                'Content-Type': 'application/json',
-              },
-            });
+            const request = await fetch(
+              'https://kiwasthal-blog-server.herokuapp.com/api/login',
+              {
+                method: 'POST',
+                body: formData,
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              }
+            );
             const resJson = await request.json();
             if (request.status === 200) {
               await updateUserAuth(true);
@@ -208,7 +211,7 @@ const Login = ({ updateUserAuth }) => {
                     className="bg-gray-900 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     type="submit"
                   >
-                    Register
+                    Login
                   </button>
                 )}
               </div>

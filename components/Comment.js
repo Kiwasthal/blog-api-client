@@ -47,14 +47,17 @@ const Comment = ({ comment, index, userAuth }) => {
       const bearer = `Bearer ${token}`;
 
       try {
-        const request = await fetch(`http://localhost:3000/api/comments`, {
-          method: 'PUT',
-          body: commentid,
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: bearer,
-          },
-        });
+        const request = await fetch(
+          `https://kiwasthal-blog-server.herokuapp.com/api/comments`,
+          {
+            method: 'PUT',
+            body: commentid,
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: bearer,
+            },
+          }
+        );
         const data = await request.json();
         if (request.status === 200 && data.result.matchedCount)
           setFakeLike(true);

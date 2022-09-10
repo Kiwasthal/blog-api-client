@@ -81,13 +81,16 @@ const Register = () => {
           const formData = JSON.stringify(values);
 
           try {
-            const request = await fetch('http://localhost:3000/api/register', {
-              method: 'POST',
-              body: formData,
-              headers: {
-                'Content-Type': 'application/json',
-              },
-            });
+            const request = await fetch(
+              'https://kiwasthal-blog-server.herokuapp.com/api/register',
+              {
+                method: 'POST',
+                body: formData,
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              }
+            );
             const resJson = await request.json();
             if (request.status === 200) router.replace('/login');
             else {

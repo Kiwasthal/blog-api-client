@@ -13,10 +13,14 @@ const Home = ({ posts, topPosts }) => {
 };
 
 export async function getStaticProps() {
-  let response = await fetch('http://localhost:3000/api/posts');
+  let response = await fetch(
+    'https://kiwasthal-blog-server.herokuapp.com/api/posts'
+  );
   const allPostsData = await response.json();
 
-  response = await fetch('http://localhost:3000/api/posts/top');
+  response = await fetch(
+    'https://kiwasthal-blog-server.herokuapp.com/api/posts/top'
+  );
   const topPostsData = await response.json();
 
   return {

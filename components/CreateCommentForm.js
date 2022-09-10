@@ -33,7 +33,7 @@ const CreateCommentForm = ({ userAuth, regenerate }) => {
 
             try {
               const request = await fetch(
-                `http://localhost:3000/api/posts/${param}/comments`,
+                `https://kiwasthal-blog-server.herokuapp.com/api/posts/${param}/comments`,
                 {
                   method: 'POST',
                   body: formData,
