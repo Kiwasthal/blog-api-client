@@ -43,7 +43,12 @@ const Post = ({ post, comments, userAuth }) => {
 
             {currentComments && currentComments.length ? (
               currentComments.map((comment, index) => (
-                <Comment key={comment._id} comment={comment} index={index} />
+                <Comment
+                  key={comment._id}
+                  comment={comment}
+                  index={index}
+                  userAuth={userAuth}
+                />
               ))
             ) : (
               <div className="text-gray-900  text-xl mt-6">

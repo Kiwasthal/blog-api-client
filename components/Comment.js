@@ -1,30 +1,68 @@
 import moment from 'moment';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-const Comment = ({ comment, index }) => {
+const commentVariants = {
+  hidden: index => ({
+    x: index % 2 === 1 ? 100 : -100,
+    opacity: 0,
+  }),
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 1,
+      delay: 0.2,
+    },
+  },
+};
+
+const Comment = ({ comment, index, userAuth }) => {
   const controls = useAnimation();
   const [ref, inView] = useInView();
+  const [likeClicked, setLikeClicked] = useState(false);
+  const [fakeLike, setFakeLike] = useState(false);
 
-  const commentVariants = {
-    hidden: index => ({
-      x: index % 2 === 1 ? 100 : -100,
-      opacity: 0,
-    }),
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 1,
-        delay: 0.2,
-      },
-    },
+  const checkLikedComments = id => {
+    if (comment.likes.includes(id)) setLikeClicked(true);
+    else setLikeClicked(false);
   };
+
+  useEffect(() => {
+    if (userAuth && !likeClicked) {
+      const id = localStorage.getItem('id');
+      checkLikedComments(id);
+    }
+  }, [userAuth]);
 
   useEffect(() => {
     if (inView) controls.start('visible');
   }, [controls, inView]);
+
+  const updateLike = async () => {
+    if (userAuth) {
+      const commentid = JSON.stringify({ commentid: comment._id });
+      const token = localStorage.getItem('token');
+      const bearer = `Bearer ${token}`;
+
+      try {
+        const request = await fetch(`http://localhost:3000/api/comments`, {
+          method: 'PUT',
+          body: commentid,
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: bearer,
+          },
+        });
+        const data = await request.json();
+        if (request.status === 200 && data.result.matchedCount)
+          setFakeLike(true);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
 
   return (
     <motion.div
@@ -48,13 +86,14 @@ const Comment = ({ comment, index }) => {
       <hr />
       <div className="flex justify-end p-2 gap-2  mt-1">
         <span className="text-gray-900  font-extrabold">
-          Likes : {comment.likes.length}
+          Likes : {fakeLike ? comment.likes.length + 1 : comment.likes.length}
         </span>
         <svg
           className="w-6 h-5 hover:shadow-2xl cursor-pointer hover:scale-150 transition-transform ease-out"
           fill="#111827"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
+          onClick={updateLike}
         >
           <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"></path>
         </svg>
