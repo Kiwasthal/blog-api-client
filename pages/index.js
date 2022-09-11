@@ -28,6 +28,7 @@ export async function getStaticProps() {
       posts: allPostsData,
       topPosts: topPostsData,
     },
+    rebalidate: 2,
   };
 }
 
