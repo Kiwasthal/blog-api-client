@@ -14,9 +14,9 @@
 Take a look at the <a href='https://kiwasthal-blog.vercel.app/'>Client Here!</a>, deployed with Vercel.
 
 <ul>
-  <li><a href=''>Visit Client Code</a></li>
-  <li><a href=''>Visit CMS Code</a></li>
-  <li><a href=''>Visit API Code</a></li>
+  <li><a href='https://github.com/Kiwasthal/blog-api-client'>Visit Client Code</a></li>
+  <li><a href='https://github.com/Kiwasthal/blog-api-cms'>Visit CMS Code</a></li>
+  <li><a href='https://github.com/Kiwasthal/blog-api-server'>Visit API Code</a></li>
 </ul>
 
 ## About
